@@ -15,3 +15,4 @@ gem 'turbolinks', '~> 5'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'tzinfo-data'
+gem 'twitter-bootstrap-rails'
