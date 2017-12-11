@@ -1,4 +1,11 @@
 <!-- <%= nav_bar brand: "GeekStore", brand_link: "/produtos" %> -->
+<% if notice %>
+  <div id="notice" class="alert alert-success alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <%= notice %>
+  </div>
+<% end %>
+
 <table class ="table table-bordered">
   <thead>
     <tr>
@@ -18,7 +25,7 @@
       <td><%= produto.preco %></td>
       <td><%= produto.quantidade %></td>
       <td>
-        <%= button_to "Remover", produto, method: :delete,  class: "btn btn-danger",
+        <%= button_to "Remover", produto, method: :delete,  class: "btn btn-danger center-block",
               data: { confirm: "Tem certeza que deseja remover #{produto.nome}?"} %>
         <!-- <%= link_to "Remover Hum", produto, method: :delete %> -->
         <!-- <%= link_to "Remover Produto", "produtos//#{produto.id}/remove" %> -->
@@ -31,6 +38,7 @@
 
 <table class="table table-bordered">
   <thead>
+    <h2><font color="green"> Melhores Ofertas </font></h2>
     <tr>
       <th>Nome</th>
       <th>Descrição</th>

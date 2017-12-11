@@ -6,18 +6,27 @@ class ProdutosController < ApplicationController
 
   def busca
     @nome_a_buscar = params[:nome]
-    @produtos = Produto.where "nome like ?", "%#{@nome_a_buscar}%"
+    if @nome_a_buscar == "*"
+      @produtos = Produto.where "nome like '%%'"
+    else
+      @produtos = Produto.where "nome like ?", "%#{@nome_a_buscar}%"
+    end
   end
 
   def create
     valores = params.require(:produto).permit :nome, :preco, :descricao, :quantidade
-    produto = Produto.create valores
-    redirect_to root_url
+    @produto = Produto.create valores
+    if @produto.save
+      redirect_to root_url, notice: 'Product was successfully created.'
+    else
+      render :new
+    end
+    #redirect_to root_url
   end
 
   def destroy
     id = params[:id]
-    Produto.destroy id
-    redirect_to root_url
+    @produto = Produto.destroy id
+    redirect_to root_url, notice: 'Produto excluído com sucesso!'
   end
 end
