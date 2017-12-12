@@ -4,26 +4,13 @@
       <th>Nome</th>
       <th>Descrição</th>
       <th>Preço</th>
-      <th>Quantidade</th>
+      <!-- <th>Quantidade</th> -->
       <th></th>
     </tr>
   </thead>
   <tbody>
-    <!-- <% todos = Produto.order :nome %> -->
-    <% @produtos.each do |produto| %>
-    <tr>
-      <td><%= produto.nome %></td>
-      <td><%= produto.descricao %></td>
-      <td><%= produto.preco %></td>
-      <td><%= produto.quantidade %></td>
-      <td>
-        <%= button_to "Remover", produto, method: :delete,  class: "btn btn-danger center-block",
-              data: { confirm: "Tem certeza que deseja remover #{produto.nome}?"} %>
-        <!-- <%= link_to "Remover Hum", produto, method: :delete %> -->
-        <!-- <%= link_to "Remover Produto", "produtos//#{produto.id}/remove" %> -->
-        <!-- <a href="/produtos/<%= produto.id %>/remove">Remover</a> -->
-      </td>
-    </tr>
-    <% end %>
+
+      <%= render @produtos %>
+      
   </tbody>
 </table>
