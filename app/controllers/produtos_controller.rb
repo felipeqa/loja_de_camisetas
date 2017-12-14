@@ -6,6 +6,7 @@ class ProdutosController < ApplicationController
 
   def new
     @produto = Produto.new
+    @departamentos = Departamento.all
   end
 
   def busca
@@ -18,12 +19,13 @@ class ProdutosController < ApplicationController
   end
 
   def create
-    valores = params.require(:produto).permit :nome, :preco, :descricao, :quantidade
+    valores = params.require(:produto).permit :nome, :preco, :descricao, :quantidade, :departamento_id
     @produto = Produto.new valores
     if @produto.save
       #flash[:notice] = 'Produto 2222criado com Sucesso.'
       redirect_to root_url, notice: 'Produto criado com Sucesso.'
     else
+      @departamentos = Departamento.all
       render :new
     end
     #redirect_to root_url

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :departamentos
   #/path => controller#method
   # get 'produtos' => 'produtos#index'
   # post '/produtos' => 'produtos#create'
