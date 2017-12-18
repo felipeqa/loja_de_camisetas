@@ -1,0 +1,47 @@
+<%= form_for @produto do |f| %>
+
+<div class="form-group">
+  <%= f.label :nome %>
+  <%= f.text_field :nome, class: "form-control" %>
+  <br/>
+</div>
+
+<div class="form-group">
+  <%= f.label :descricao , 'Descrição' %>
+  <%= f.text_area :descricao, class: "form-control", rows: 4 %>
+</div>
+
+<div class="form-group">
+  <%= f.label :departamento %>
+  <%= f.collection_select :departamento_id, @departamentos, :id, :nome, {}, class: "form-control" %>
+</div>
+
+<div class="form-inline">
+  <div class="form-group">
+    <%= f.label :quantidade %>
+    <%= f.number_field :quantidade, min: 0, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :preco, 'Preço' %>
+    <%= f.number_field :preco, step: 0.01, min: 0, class: "form-control" %>
+  </div>
+  <%= f.submit texto_da_acao, class: "btn btn-primary" %>
+</div>
+<br/>
+<br/>
+
+<% if @produto && @produto.errors.any? %>
+<div id="error_explanation", class="alert alert-danger">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h3><%= pluralize(@produto.errors.count, "erros") %> encontrados: Verifique o preenchimento!</h3>
+
+  <ul>
+    <% @produto.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+
+</div>
+<% end %>
+<% end %>

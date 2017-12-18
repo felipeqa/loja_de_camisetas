@@ -1,4 +1,6 @@
 class ProdutosController < ApplicationController
+
+  before_action :set_produto, only: [:edit, :update, :destroy ]
   def index
     @produtos_por_nome =  Produto.order(:nome).limit 5
     @produtos_por_preco = Produto.order(:preco).limit 2
@@ -6,7 +8,7 @@ class ProdutosController < ApplicationController
 
   def new
     @produto = Produto.new
-    @departamentos = Departamento.all
+    renderiza :new
   end
 
   def busca
@@ -18,22 +20,47 @@ class ProdutosController < ApplicationController
     end
   end
 
+  def edit
+    renderiza :edit
+  end
+
+  def update
+    if @produto.update produto_params
+      redirect_to root_url, notice: 'Produto editado com Sucesso.'
+    else
+      renderiza :edit
+    end
+  end
+
   def create
-    valores = params.require(:produto).permit :nome, :preco, :descricao, :quantidade, :departamento_id
-    @produto = Produto.new valores
+    @produto = Produto.new produto_params
     if @produto.save
       #flash[:notice] = 'Produto 2222criado com Sucesso.'
       redirect_to root_url, notice: 'Produto criado com Sucesso.'
     else
-      @departamentos = Departamento.all
-      render :new
+      renderiza :new
     end
     #redirect_to root_url
   end
 
   def destroy
-    id = params[:id]
-    @produto = Produto.destroy id
+    @produto.destroy
     redirect_to root_url, notice: 'Produto excluído com sucesso!'
+  end
+
+  private
+
+  def renderiza(view)
+    @departamentos = Departamento.all
+    render view
+  end
+
+  def set_produto
+    id = params[:id]
+    @produto = Produto.find(id)
+  end
+
+  def produto_params
+    params.require(:produto).permit :nome, :preco, :descricao, :quantidade, :departamento_id
   end
 end
