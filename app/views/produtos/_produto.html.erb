@@ -5,7 +5,7 @@
   <td><%= produto.preco %></td>
   <!-- <td><%= produto.quantidade %></td> -->
   <td>
-    <%= button_to "Remover", produto, method: :delete,  class: "btn btn-danger center-block",
+    <%= button_to "Remover", produto, method: :delete,  class: "btn btn-danger ",
           data: { confirm: "Tem certeza que deseja remover #{produto.nome}?"} %>
     <!-- <%= link_to "Remover Hum", produto, method: :delete %> -->
     <!-- <%= link_to "Remover Produto", "produtos//#{produto.id}/remove" %> -->
@@ -14,7 +14,7 @@
 
   <td>
 
-    <%= link_to "Alterar Produto",  edit_produto_path(produto), class: "btn btn-default center-block" %>
+    <%= button_to "Alterar Produto",  edit_produto_path(produto), method: :get, class: "btn btn-default " %>
 
   </td>
 

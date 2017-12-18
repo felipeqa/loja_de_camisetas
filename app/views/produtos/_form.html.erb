@@ -32,9 +32,9 @@
 <br/>
 
 <% if @produto && @produto.errors.any? %>
-<div id="error_explanation", class="alert alert-danger">
+<div id="error_explanation" class="alert alert-danger">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <h3><%= pluralize(@produto.errors.count, "erros") %> encontrados: Verifique o preenchimento!</h3>
+  <h4><%= pluralize(@produto.errors.count, "erros") %> encontrados: Verifique o preenchimento!</h4>
 
   <ul>
     <% @produto.errors.full_messages.each do |message| %>
